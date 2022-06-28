@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/school/popup.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:untitled/school/school_dshboard.dart';
 
 
 class Payment extends StatelessWidget {
@@ -34,8 +35,10 @@ class Payment extends StatelessWidget {
       ),
       home: Scaffold(
           resizeToAvoidBottomInset: true,
+
         appBar: AppBar(
             backgroundColor: myHexColor,
+
             title: const Text(_title),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -64,16 +67,16 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final TextEditingController _controller = TextEditingController();
   final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
+    'Cheque',
+    'NEFT',
+    'ONLINE',
+    
   ];
+
   Color myHexColor = const Color(0xff1b1f69);
   int value = 0;
   final List<String> genderItems = [
-    'Male',
-    'Female',
+    'Anil Rai'
   ];
 
   String? selectedValue;
@@ -90,7 +93,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return ListView(
     // physics: const NeverScrollableScrollPhysics(),
-     primary: false,
+
       children: <Widget>[
 
         Padding(
@@ -106,9 +109,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
+                      prefixIcon:const Icon(Icons.person),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 10,
                         vertical: 10,
+
                       ),
                       labelText: 'Student Name',
                       hintText: 'Enter Your Full Name.',
@@ -124,6 +129,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //Add isDense true and zero Padding.
                       //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                       isDense: true,
+                      prefixIcon:const Icon(Icons.card_membership),
                       contentPadding: EdgeInsets.zero,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -133,12 +139,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                     isExpanded: true,
                     hint: const Text(
-                      'Select Your Gender',
+                      'Select Member',
                       style: TextStyle(fontSize: 14),
-                    ),
-                    icon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
                     ),
 
                     items: genderItems
@@ -155,14 +157,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         .toList(),
                     validator: (value) {
                       if (value == null) {
-                        return 'Please select gender.';
+                        return 'Please select member.';
                       }
                     },
-                    value: selectedValue,
+
                     onChanged: (value) {
-                      setState(() {
-                        selectedValue = value as String;
-                      });
+                      //onchange code
                     },
                     buttonHeight: 60,
                     buttonPadding: const EdgeInsets.only(left: 20, right: 10),
@@ -185,7 +185,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             horizontal: 10,
                             vertical: 8,
                           ),
-                          hintText: 'Search for an item...',
+                          hintText: 'Search for an member',
                           hintStyle: const TextStyle(fontSize: 12),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -212,6 +212,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //Add isDense true and zero Padding.
                       //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                       isDense: true,
+                      prefixIcon:const Icon(Icons.payment),
                       contentPadding: EdgeInsets.zero,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -226,6 +227,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       style: TextStyle(fontSize: 14),
                     ),
                     icon: const Icon(
+
                       Icons.arrow_drop_down,
                       color: Colors.black45,
                     ),
@@ -235,6 +237,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     dropdownDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
+
                     items: items
                         .map((item) =>
                         DropdownMenuItem<String>(
@@ -252,8 +255,48 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         return 'Please select Payment Method.';
                       }
                     },
+                    value: selectedValue,
                     onChanged: (value) {
-                      //Do something when changing the item if you want.
+                      setState(() {
+                        selectedValue = value as String;
+                      });
+                    },
+                    
+                    buttonWidth: 200,
+                    itemHeight: 40,
+                    dropdownMaxHeight: 200,
+                    searchController: textEditingController,
+                    searchInnerWidget: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        bottom: 4,
+                        right: 8,
+                        left: 8,
+                      ),
+                      child: TextFormField(
+                        controller: textEditingController,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 8,
+                          ),
+                          hintText: 'Search for an method',
+                          hintStyle: const TextStyle(fontSize: 12),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    searchMatchFn: (item, searchValue) {
+                      return (item.value.toString().contains(searchValue));
+                    },
+                    //This to clear the search value when you close the menu
+                    onMenuStateChange: (isOpen) {
+                      if (!isOpen) {
+                        textEditingController.clear();
+                      }
                     },
                     onSaved: (value) {
                       selectedValue = value.toString();
@@ -278,9 +321,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       ),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                        }
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const School_dashboard()));
                       },
                       child: const Text('Submit Button'),
                     ),

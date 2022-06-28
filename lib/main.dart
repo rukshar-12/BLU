@@ -35,14 +35,14 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  final GlobalKey<FormState> _formKey = GlobalKey();
   Color myHexColor = Color(0xff1b1f69);
    @override
   Widget build(BuildContext context) {
 
     return ListView(
 
-
+     key: _formKey,
      children: <Widget>[
 
        Container(
@@ -134,9 +134,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontSize: 20.0,
                     ),),
                     onPressed: () {
-
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => const Otp()));
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState?.validate();
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => const Otp()));
+                      }
                     },
                   )
               ),
