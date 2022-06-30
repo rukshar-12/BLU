@@ -13,6 +13,7 @@ class School_dashboard extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     Orientation orientation = MediaQuery.of(context).orientation;
     return MaterialApp(
+
       title: _title,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -33,15 +34,15 @@ class School_dashboard extends StatelessWidget {
               child: Container(
                 height: 300,
                 width: MediaQuery.of(context).size.width,
-                color: const Color(0xFFE3F2FD),
+                color: const Color(0xFF90CAF9),
               ),
             ),
             centerTitle: true,
             title: Image.asset('assets/images/hira.png',
                 width: 80000,
-                height: 500),
-
+                height: 5000),
           ),
+
           Positioned(
             top: 200,
             left: 20,
@@ -139,12 +140,43 @@ class School_dashboard extends StatelessWidget {
                     ],
                   ),
             ),
+
           )
+          ),
+          Positioned(
+              top: 500,
+              left: 20,
+              right: 20,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('School Dashboard',style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
+                    ),),
+                  ),
+                  GridView.count(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 30.0,
+                    shrinkWrap: true,
+                    children: List.generate(choices.length, (index) {
+                     return Center(
+                       child: SelectCard(choice: choices[index]),
+                     );
+                    },),),
+                ],
+              ),
           ),
         ],
 
       ),
+
+
     );
+
   }
 }
 
@@ -166,32 +198,59 @@ class Customshape extends CustomClipper<Path>{
     return false;
   }
 }
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
 
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+class Choice {
+  const Choice({required this.title,  required this.image});
+  final String title;
+  final ImageProvider image;
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+const List<Choice> choices = <Choice>[
+  Choice(title: 'Appointment', image: AssetImage('assets/images/appoint.png')),
+  Choice(title: 'Assignment', image: AssetImage('assets/images/assignment.png')),
+  Choice(title: 'Attendance', image: AssetImage('assets/images/atten.png')),
+  Choice(title: 'Calender', image: AssetImage('assets/images/calender.png')),
+  Choice(title: 'Fees', image: AssetImage('assets/images/fees.png')),
+  Choice(title: 'Leave', image: AssetImage('assets/images/leave.png')),
+  Choice(title: 'Profile', image:AssetImage('assets/images/profile.png')),
+  Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+
+];
+
+class SelectCard extends StatelessWidget {
+  const SelectCard({Key? key, required this.choice}) : super(key: key);
+  final Choice choice;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: const [
-          Image(image: AssetImage('assets/images/appoint.png')),
-          Image(image: AssetImage('assets/images/assignment.png')),
-          Image(image: AssetImage('assets/images/calender.png')),
-          Image(image: AssetImage('assets/images/profile.png')),
-          Image(image: AssetImage('assets/images/upload.png')),
-          Image(image: AssetImage('assets/images/fess.png')),
-          Image(image: AssetImage('assets/images/atten.png')),
+    final TextStyle? textStyle = Theme
+        .of(context)
+        .textTheme
+        .displaySmall;
+    return SizedBox(
+      height: 500,
+      width: 500,
+      child: Card(
+          color: Colors.white,
+          elevation:5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Center(child: Column(
+             // crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Image(image: choice.image),
 
-
-        ],
+                Text(choice.title, style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
+                )),
+              ]
+          ),
+          )
       ),
-
     );
   }
-}
 
+}

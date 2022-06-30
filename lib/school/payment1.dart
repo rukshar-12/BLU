@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/school/myschool.dart';
 import 'package:untitled/school/popup.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -321,9 +322,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       ),
                       onPressed: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> School_dashboard()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Myschool()));
                       },
-                      child: const Text('Submit Button'),
+                      child: const Text('Next'),
                     ),
                   ),
                 ],
