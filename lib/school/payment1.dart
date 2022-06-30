@@ -321,7 +321,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       ),
                       onPressed: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const School_dashboard()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> School_dashboard()));
                       },
                       child: const Text('Submit Button'),
                     ),
@@ -331,7 +331,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
 
 
-      ),
+      )
 
     ),
     ],
