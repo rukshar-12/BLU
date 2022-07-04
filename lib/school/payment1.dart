@@ -282,7 +282,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             horizontal: 10,
                             vertical: 8,
                           ),
-                          hintText: 'Search for an method',
+                          hintText: 'Search for a method',
                           hintStyle: const TextStyle(fontSize: 12),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -322,7 +322,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       ),
                       onPressed: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Myschool()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> School_dashboard()));
                       },
                       child: const Text('Next'),
                     ),

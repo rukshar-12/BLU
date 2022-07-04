@@ -29,8 +29,8 @@ class Myschool extends StatelessWidget {
               clipper: Customshape(),
               child: Container(
                 height: 300,
-                width: MediaQuery.of(context).size.width,
-                color: const Color(0xFF90CAF9),
+                width: double.infinity,
+                color: myHexColor,
               ),
             ),
             centerTitle: true,
@@ -39,7 +39,7 @@ class Myschool extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 50,
-                color: Colors.black
+                color: Colors.white
               ),
             )
           ),
@@ -54,25 +54,151 @@ class Myschool extends StatelessWidget {
                 width: 450,
                 child: Card(
                   elevation: 15,
-                  color: myHexColor,
+                  color:const Color(0xFF90CAF9),
                   borderOnForeground:true,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  // child: Row(
-                  //   children:const [
-                  //     Image(image: AssetImage('assets/image/hfs.png')),
-                  //     Text('Hiranandani Foundation School Mens Sana in Corpore San',
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //       fontSize: 30,
-                  //     ),)
-                  //   ],
-                  // ),
+                  child:
+                      Container(
+                        width: 500,
+                         height: 500,
+                         child:const Image(image: AssetImage('assets/images/hira.png'))
+                      ),
                 ),
 
               )
           ),
+          Positioned(
+              top: 550,
+              left: 20,
+              right: 20,
+              child:Padding(
+                padding: const EdgeInsets.only(left: 5,right: 5),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Text('Student Details',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black
+                        ),
+                         ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10,10,10,10),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    //  side: BorderSide(color: Colors.re)
+                                  )
+                              )
+
+                          ),
+
+                            onPressed:(){},
+                            child:Row(
+                             // mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image(image: AssetImage('assets/images/person.png'),),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text('Jayden Shijoy',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),),
+                                    ),
+                                    Text('Class-1-D',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                      ),)
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Icon(Icons.arrow_circle_right,
+                                  size: 50,
+                                  color: Colors.black,),
+                                ),
+                              ],
+                            )
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10,10,10,10),
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.white),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      //  side: BorderSide(color: Colors.re)
+                                    )
+                                )
+
+                            ),
+
+                            onPressed:(){},
+                            child:Row(
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image(image: AssetImage('assets/images/person.png'),),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text('Jayden Shijoy',
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),),
+                                    ),
+                                    Text('Class-1-D',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                      ),)
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Icon(Icons.arrow_circle_right,
+                                    size: 50,
+                                  color: Colors.black,),
+                                ),
+                              ],
+                            )
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ) ),
 
         ],
 
@@ -102,4 +228,3 @@ class Customshape extends CustomClipper<Path>{
     return false;
   }
 }
-

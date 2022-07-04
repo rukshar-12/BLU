@@ -1,6 +1,12 @@
+import 'dart:collection';
+import 'dart:html';
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shape_of_view_null_safe/shape/arc.dart';
+import 'package:untitled/Vegies/vegetables.dart';
+import 'package:untitled/school/myschool.dart';
 
 class School_dashboard extends StatelessWidget {
   const School_dashboard({Key? key}) : super(key: key);
@@ -33,7 +39,7 @@ class School_dashboard extends StatelessWidget {
               clipper: Customshape(),
               child: Container(
                 height: 300,
-                width: MediaQuery.of(context).size.width,
+                width:double.infinity,
                 color: const Color(0xFF90CAF9),
               ),
             ),
@@ -124,7 +130,7 @@ class School_dashboard extends StatelessWidget {
                         ),
 
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 300, 50),
 
                             child:Text('2015-10-05',
@@ -149,24 +155,20 @@ class School_dashboard extends StatelessWidget {
               right: 20,
               child: Column(
                 children: [
+
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('School Dashboard',style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                    ),),
+                    padding: const EdgeInsets.only(top: 30),
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 30.0,
+                      shrinkWrap: true,
+                      children: List.generate(_itemsComponent().length, (index) {
+                       return Center(
+                         child: SelectCard(choice: _itemsComponent()[index]),
+                       );
+                      },),),
                   ),
-                  GridView.count(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 30.0,
-                    shrinkWrap: true,
-                    children: List.generate(choices.length, (index) {
-                     return Center(
-                       child: SelectCard(choice: choices[index]),
-                     );
-                    },),),
                 ],
               ),
           ),
@@ -203,19 +205,33 @@ class Choice {
   const Choice({required this.title,  required this.image});
   final String title;
   final ImageProvider image;
+
+
+
+}
+List<Choice> _itemsComponent() {
+  const List<Choice> choices = <Choice>[
+    Choice(title: '  Appoint                                    '
+        '       ment', image: AssetImage('assets/images/appoint.png')),
+    Choice(title: 'Assignment', image: AssetImage('assets/images/assignment.png')),
+    Choice(title: 'Attendance', image: AssetImage('assets/images/atten.png')),
+    Choice(title: 'Calender', image: AssetImage('assets/images/calender.png')),
+    Choice(title: 'Fees', image: AssetImage('assets/images/fees.png')),
+    Choice(title: 'Leave', image: AssetImage('assets/images/leave.png')),
+    Choice(title: 'Profile', image: AssetImage('assets/images/profile.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+    Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
+
+  ];
+  return choices;
 }
 
-const List<Choice> choices = <Choice>[
-  Choice(title: 'Appointment', image: AssetImage('assets/images/appoint.png')),
-  Choice(title: 'Assignment', image: AssetImage('assets/images/assignment.png')),
-  Choice(title: 'Attendance', image: AssetImage('assets/images/atten.png')),
-  Choice(title: 'Calender', image: AssetImage('assets/images/calender.png')),
-  Choice(title: 'Fees', image: AssetImage('assets/images/fees.png')),
-  Choice(title: 'Leave', image: AssetImage('assets/images/leave.png')),
-  Choice(title: 'Profile', image:AssetImage('assets/images/profile.png')),
-  Choice(title: 'Upload', image: AssetImage('assets/images/upload.png')),
 
-];
 
 class SelectCard extends StatelessWidget {
   const SelectCard({Key? key, required this.choice}) : super(key: key);
@@ -227,28 +243,57 @@ class SelectCard extends StatelessWidget {
         .of(context)
         .textTheme
         .displaySmall;
-    return SizedBox(
-      height: 500,
-      width: 500,
-      child: Card(
-          color: Colors.white,
-          elevation:5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Center(child: Column(
-             // crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Image(image: choice.image),
 
-                Text(choice.title, style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold
-                )),
-              ]
+
+    return Padding(
+      padding: EdgeInsets.only(left: 0,right: 0),
+      child: Container(
+        height: 5000,
+        width: 500,
+          
+
+                child: Center(
+                  child: ElevatedButton(
+
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(10),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      shape:MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    //  side: BorderSide(color: Colors.re)
+                  )
+              )
+
           ),
-          )
+                    onPressed: () {
+                     if(choice.title=="Fees"){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const Myschool()));
+                     }
+                     else if(choice.title=="Calender"){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const vegieslist()));
+                     }
+                      },
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image(image: choice.image),
+
+                          Text(choice.title,
+                              style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          )
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              
+            
+          
       ),
     );
   }
